@@ -1,0 +1,16 @@
+schemaVersion: '2.2'
+description: Install chef ws
+parameters:
+  Message:
+    type: String
+    description: Installing chef workstation on EC2
+    default: Do work
+mainSteps:
+  - action: 'aws:runShellScript'
+    name: updateInstallChefWS
+    inputs:
+      timeoutSeconds: '60'
+      runCommand:
+        - sudo yum update -y
+        - wget https://chef-workstation-package-testing.s3.amazonaws.com/chef-workstation-20.7.81-1.el7.x86_64.rpm
+        - sudo rpm -i chef-workstation-20.7.81-1.el7.x86_64.rpm
